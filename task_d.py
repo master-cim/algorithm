@@ -4,10 +4,12 @@ from typing import List
 def get_weather_randomness(n: int, temperatures: List[int]) -> int:
     result = 0
     for i in range(0, n):
-        if temperatures[i] > 0:
-        # start = temperatures[i+1] - temperatures[i]
-        # print(start)
+        print(temperatures[i])
+        if i == n:
             result += 1
+        # if temperatures[i+1]-temperatures[i] > 1:
+        # # print(start)
+        #     result += 1
             return result
 
 
