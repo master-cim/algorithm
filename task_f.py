@@ -1,7 +1,3 @@
-from re import I
-from unittest import result
-
-
 def is_palindrome(line: str) -> bool:
     rem_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ',
                 '!', '"', '#', '$', '%', '&', '\', ''',
