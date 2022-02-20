@@ -10,12 +10,16 @@ def get_close_empty_section(n: int, section: List[int], ) -> List[int]:
     for i in range(0, n):
         if section[i] == 0:
             list_zero_index.append(i)
+        print(list_zero_index.__sizeof__())
     for k in range(0, len(list_zero_index)):
         distance = [abs(m-list_zero_index[k]) for m in range(0, n)]
         list_distance.append(distance)
+        print(list_distance.__sizeof__())
     for index in range(0, n):
         min_distance = min([item[index] for item in list_distance])
         result.append(min_distance)
+        print(result.__sizeof__())
+
     return result
 
 
