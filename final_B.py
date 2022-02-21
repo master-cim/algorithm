@@ -8,9 +8,14 @@ def twist_of_the_wrist(k: int, matrix: List[str]) -> int:
                                 if matrix.count(x) > 0))
     win = 0
     pairs = [(v, k) for (k, v) in count_numbers.items()]
-    for i in range(1, len(count_numbers)):
-        if pairs[i][0] <= limit_pressures:
-            win += 1
+    print(pairs[:][0])
+    if pairs[:][0] == '.':
+        pairs.pop(0)
+        win = 0
+    else:
+        for i in range(0, len(count_numbers)):
+            if pairs[i][0] <= limit_pressures:
+                win += 1
     print(win)
 
 
