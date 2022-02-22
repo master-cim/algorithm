@@ -1,7 +1,11 @@
+# C. Соседи
+# ID успешной посылки 65248202
+
 from typing import List, Tuple
 
 
-def get_neighbours(n: int, m: int, matrix: List[List[int]], row: int, col: int) -> List[int]:
+def get_neighbours(n: int, m: int, matrix: List[List[int]],
+                   row: int, col: int) -> List[int]:
     result = []
     if row != n-1:
         down = (matrix[row+1])[col]

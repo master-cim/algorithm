@@ -1,3 +1,7 @@
+# G. Работа из дома
+# ID успешной посылки  65286224
+
+
 def to_binary(number: int) -> str:
     b = ''
     while number > 0:
@@ -5,7 +9,9 @@ def to_binary(number: int) -> str:
         number = number // 2
     return(b)
 
+
 def read_input() -> int:
     return int(input().strip())
+
 
 print(to_binary(read_input()))

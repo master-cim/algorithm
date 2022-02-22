@@ -1,3 +1,4 @@
+# B. Ловкость рук
 # ID успешной посылки 65406475
 from typing import List, Tuple
 

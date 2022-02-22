@@ -1,3 +1,4 @@
+# A. Ближайший ноль
 # ID успешной посылки 65358088
 from typing import List, Tuple
 

@@ -1,3 +1,7 @@
+# E. Самое длинное слово
+# ID успешной посылки 65281468
+
+
 def get_longest_word(line: str) -> str:
     word = line.split()
     max_string = max(word, key=len)

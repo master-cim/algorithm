@@ -1,3 +1,7 @@
+# B. Чётные и нечётные числа
+# ID успешной посылки 65217377
+
+
 from typing import List, Tuple
 
 

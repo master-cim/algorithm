@@ -1,3 +1,7 @@
+# L. Лишняя буква
+# ID успешной посылки 65305442
+
+
 from typing import Tuple
 
 
