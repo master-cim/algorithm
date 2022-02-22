@@ -4,8 +4,8 @@ from typing import List, Tuple
 def twist_of_the_wrist(k: int, matrix: List[str]) -> int:
     limit_pressures = k * 2
     count_numbers = dict((x, matrix.count(x))
-                         for x in set(matrix)
-                         if matrix.count(x) > 0)
+                                for x in set(matrix)
+                                if matrix.count(x) > 0)
     win = 0
     pairs = [(v, k) for (k, v) in count_numbers.items()]
     for i in range(0, len(count_numbers)):
@@ -20,6 +20,7 @@ def read_input() -> Tuple[int, List[List[str]]]:
     for _ in range(4):
         matrix.extend(list(map(str, input().strip())))
     matrix = [n for n in matrix if n != '.']
+    print(matrix)
     return k, matrix
 
 
