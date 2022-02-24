@@ -1,11 +1,11 @@
 # A. Ближайший ноль
 # ID успешной посылки 65358088
-from typing import List, Tuple
+from typing import Tuple
 
 
-def get_close_empty_section(n: int, section: Tuple[int]) -> List[int]:
-    list_distance = [float('inf')] * n
-    for idx in [range(n), range(n-1, -1, -1)]:
+def get_close_empty_section(cardinality: int, section: Tuple[int]):
+    list_distance = [float('inf')] * cardinality
+    for idx in [range(cardinality), range(cardinality-1, -1, -1)]:
         distance = float('inf')
         for i in idx:
             if section[i] == 0:
@@ -16,10 +16,11 @@ def get_close_empty_section(n: int, section: Tuple[int]) -> List[int]:
 
 
 def read_input() -> Tuple[int, Tuple[int]]:
-    n = int(input())
-    section = list(map(int, input().strip().split()))
-    return n, section
+    cardinality = int(input())
+    section = [int(element) for element in input().strip().split()]
+    return cardinality, section
 
 
-n, section = read_input()
-print(" ".join(map(str, get_close_empty_section(n, section))))
+if __name__ == '__main__':
+    cardinality, section = read_input()
+    print(*get_close_empty_section(cardinality, section), sep=' ')
