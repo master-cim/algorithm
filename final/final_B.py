@@ -3,13 +3,14 @@
 from typing import List, Tuple
 
 
-def twist_of_the_wrist(k: int, matrix: List[str]) -> int:
-    limit_pressures = k * 2
-    count_numbers = dict((x, matrix.count(x))
-                         for x in set(matrix)
-                         if matrix.count(x) > 0)
+def twist_of_the_wrist(number_keys: int, matrix: List[str]) -> int:
+    limit_pressures = number_keys * 2
+    count_numbers = dict((number, matrix.count(number))
+                         for number in set(matrix)
+                         if matrix.count(number) > 0)
     win = 0
-    pairs = [(v, k) for (k, v) in count_numbers.items()]
+    pairs = [(sum_numbers, number_keys)
+             for (number_keys, sum_numbers) in count_numbers.items()]
     for i in range(0, len(count_numbers)):
         if pairs[i][0] <= limit_pressures:
             win += 1
@@ -17,13 +18,14 @@ def twist_of_the_wrist(k: int, matrix: List[str]) -> int:
 
 
 def read_input() -> Tuple[int, List[List[str]]]:
-    k = int(input())
+    number_keys = int(input())
     matrix = []
     for _ in range(4):
-        matrix.extend(list(map(str, input().strip())))
-    matrix = [n for n in matrix if n != '.']
-    return k, matrix
+        matrix.extend([element for element in input().strip()
+                       if element != '.'])
+    return number_keys, matrix
 
 
-k, matrix = read_input()
-twist_of_the_wrist(k, matrix)
+if __name__ == '__main__':
+    number_keys, matrix = read_input()
+    twist_of_the_wrist(number_keys, matrix)
