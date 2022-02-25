@@ -8,13 +8,8 @@ def twist_of_the_wrist(number_keys: int, matrix: List[str]) -> int:
     count_numbers = dict((number, matrix.count(number))
                          for number in set(matrix)
                          if matrix.count(number) > 0)
-    win = 0
-    pairs = [(sum_numbers, number_keys)
-             for (number_keys, sum_numbers) in count_numbers.items()]
-    for i in range(0, len(count_numbers)):
-        if pairs[i][0] <= limit_pressures:
-            win += 1
-    print(win)
+    win = sum(True for _, k in count_numbers.items() if k <= limit_pressures)
+    return(win)
 
 
 def read_input() -> Tuple[int, List[List[str]]]:
@@ -28,4 +23,4 @@ def read_input() -> Tuple[int, List[List[str]]]:
 
 if __name__ == '__main__':
     number_keys, matrix = read_input()
-    twist_of_the_wrist(number_keys, matrix)
+    print(twist_of_the_wrist(number_keys, matrix))
