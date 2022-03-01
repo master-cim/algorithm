@@ -1,5 +1,5 @@
 # B. Список дел
-# ID успешной посылки
+# ID успешной посылки 65636103
 
 class Node:
     def __init__(self, value, next_item=None):
@@ -9,7 +9,7 @@ class Node:
 
 def solution(node):
     while node:
-        print(node.value, end=" \n ")
+        print(node.value, end="\n")
         node = node.next_item
 
 
