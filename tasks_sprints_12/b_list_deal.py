@@ -1,14 +1,16 @@
-# Comment it before submitting
-# class Node:  
-#     def __init__(self, value, next_item=None):  
-#         self.value = value  
-#         self.next_item = next_item
+# B. Список дел
+# ID успешной посылки
+
+class Node:
+    def __init__(self, value, next_item=None):
+        self.value = value
+        self.next_item = next_item
+
 
 def solution(node):
     while node:
-                print(node.value, end=" \n ")
-                node = node.next
-        print("None") 
+        print(node.value, end=" \n ")
+        node = node.next_item
 
 
 def test():
@@ -22,3 +24,7 @@ def test():
     # node1
     # node2
     # node3
+
+
+if __name__ == '__main__':
+    test()
