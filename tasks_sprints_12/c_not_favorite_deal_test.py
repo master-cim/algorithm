@@ -1,5 +1,5 @@
 # C. Нелюбимое дело
-# ID успешной посылки нужно закоментировать печать и тест пройдет
+# ID успешной посылки 65659820
 
 
 class Node:
@@ -25,12 +25,12 @@ def solution(node, idx):
     if idx == 0:
         idx += 1
         new_head = node.next_item
-        print_linked_list(new_head)
+        return new_head
     else:
         previous_node = get_node_by_index(node, idx-1)
         del_node = get_node_by_index(node, idx)
         previous_node.next_item = del_node.next_item
-        print_linked_list(node)
+        return node
 
 
 def test():
