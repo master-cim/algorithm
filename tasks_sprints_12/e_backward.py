@@ -1,4 +1,5 @@
 # E. Всё наоборот
+# ID успешной посылки 65673353
 
 
 class DoubleConnectedNode:
@@ -16,13 +17,9 @@ def print_linked_list(node):
 
 def solution(node):
     prev = None
-    while node is not None:
-        next = node.next
-        node.prev = prev
-        prev = node
-        node = next
-    new_head = prev
-    print_linked_list(new_head)
+    while node:
+        node.next, prev, node = prev, node, node.next
+    return prev
 
 
 def test():
