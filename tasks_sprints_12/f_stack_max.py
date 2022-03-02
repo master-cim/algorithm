@@ -1,5 +1,5 @@
 # F. Стек - Max
-# ID успешной посылки
+# ID успешной посылки 65680227
 
 from typing import List, Tuple
 
@@ -9,7 +9,7 @@ class StackMax:
         self._items = []
 
     def push(self, item: int):
-        self._items.append(item)
+        self._items.append(int(item))
 
     def pop(self):
         try:
