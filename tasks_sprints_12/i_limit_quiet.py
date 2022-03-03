@@ -6,7 +6,7 @@ from typing import List, Tuple
 class MyQueueSized:
     def __init__(self, max_size: int):
         self._items = []
-        self.top = None
+        self.top = -1
         self.max = max_size
 
     def push(self, item: int):
@@ -32,7 +32,7 @@ class MyQueueSized:
         if self.top is None:
             print('None')
         else:
-            print(self.top.value)
+            print(self.top)
 
     def isEmpty(self):
         if self.top == -1:
@@ -51,8 +51,8 @@ class MyQueueSized:
 
 
 def run_stack(quantum_command: int, queue_length: int, command_list: List[List[str]]):
-    max_length = queue_length
-    stack = MyQueueSized()
+    max_size = queue_length
+    stack = MyQueueSized(max_size)
     for command in range(0, quantum_command):
         if command_list[command][0] == 'push':
             stack.push(command_list[command][1])
@@ -72,6 +72,7 @@ def read_input() -> Tuple[List[List[str]]]:
     command_list = []
     for _ in range(quantum_command):
         command_list.append(list(map(str, input().strip().split())))
+    print(quantum_command, queue_length, command_list)
     return(quantum_command, queue_length, command_list)
 
 
