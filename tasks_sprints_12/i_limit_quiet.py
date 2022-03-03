@@ -6,12 +6,12 @@ from typing import List, Tuple
 class MyQueueSized:
     def __init__(self, max_size: int):
         self._items = []
-        self.top = -1
+        self.top = None
         self.max = max_size
 
     def push(self, item: int):
         if self.isFull():
-            print('Stack OverFlow')
+            print('error')
             return
         else:
             self.top += 1
@@ -20,7 +20,7 @@ class MyQueueSized:
     def pop(self):
         try:
             if self.isEmpty():
-                print('Stack UnderFlow')
+                print('None')
                 return
             else:
                 self.top -= 1
@@ -28,11 +28,19 @@ class MyQueueSized:
         except IndexError:
             print('error')
 
+    def peek(self):
+        if self.top is None:
+            print('None')
+        else:
+            print(self.top.value)
 
+    def isEmpty(self):
+        if self.top == -1:
+            return True
+        else:
+            return False
 
-    # Stack's member method to check
-    # if the stack is full 
-    def isFull(self): 
+    def isFull(self):
         if self.top == self.max - 1:
             return True
         else:
