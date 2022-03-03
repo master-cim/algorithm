@@ -44,27 +44,26 @@ class MyQueueSized:
         if self.top == self.max - 1:
             return True
         else:
-            return False 
+            return False
 
-
-
-    def __len__(self):
+    def size(self):
         return len(self._items)
 
-    def __repr__(self):
-        return f'{self._items}'
 
-
-def run_stack(quantum_command: int, command_list: List[List[str]]):
+def run_stack(quantum_command: int, queue_length: int, command_list: List[List[str]]):
+    max_length = queue_length
     stack = MyQueueSized()
-    for command in range(0, len(command_list)):
+    for command in range(0, quantum_command):
         if command_list[command][0] == 'push':
             stack.push(command_list[command][1])
         elif command_list[command][0] == 'pop':
             stack.pop()
-        elif command_list[command][0] == 'get_max':
-            max_value = stack.get_max()
-            print(max_value)
+        elif command_list[command][0] == 'peek':
+            peek_value = stack.peek()
+            print(peek_value)
+        elif command_list[command][0] == 'size':
+            len_queue = stack.size()
+            print(len_queue)
 
 
 def read_input() -> Tuple[List[List[str]]]:
