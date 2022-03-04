@@ -1,19 +1,16 @@
 # L. Фибоначчи по модулю
-# ID успешной посылки
+# ID успешной посылки 65746418
 
 
-def code_amount(n_intern: int):
+def code_amount(k: int, n_intern: int):
     if n_intern == 1 or n_intern == 0:
         return 1
     previous, c_amount = 0, 1
+    degrees = 10 ** k
     for _ in range(1, n_intern + 1):
         previous, c_amount = c_amount, previous + c_amount
+        c_amount %= degrees
     return c_amount
-
-
-def k_last_number(k: int, c_amount: int):
-    result = c_amount % 10 ** k
-    return result
 
 
 def read_input():
@@ -25,4 +22,4 @@ def read_input():
 
 if __name__ == '__main__':
     k, n_intern = read_input()
-    print(k_last_number(k, code_amount(n_intern)))
+    print(code_amount(k, n_intern))
