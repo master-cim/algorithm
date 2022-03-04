@@ -4,7 +4,7 @@ import decimal
 
 
 def code_amount(k: int, n_intern: int):
-    decimal.getcontext().prec = 10000
+    decimal.getcontext().prec = 1000000
     root_5 = decimal.Decimal(5).sqrt()
     phi = ((1 + root_5) / 2)
     c_amount = ((phi ** n_intern) - ((-phi) ** -n_intern)) / root_5
