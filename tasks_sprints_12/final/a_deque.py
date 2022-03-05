@@ -7,11 +7,11 @@ from typing import List, Tuple
 class DequeCircularBuffer:
     def __init__(self, size):
         self.arr = [0] * size
-        self.start = -1
-        self.end = 0
+        self.front = -1
+        self.back = 0
         self.size = size
 
-    # добавить элемент в начало дека. 
+    # добавить элемент в начало дека.
     # Если в деке уже находится максимальное число элементов, вывести «error».
     def push_front(self, value):
         # проверка на заполненность Дека
@@ -19,16 +19,16 @@ class DequeCircularBuffer:
             print("Переполнено")
             return
         # Проверка на то что очередь в начале пуста
-        if (self.start == -1):
-            self.start = 0
-            self.end = 0
+        if (self.front == -1):
+            self.front = 0
+            self.back = 0
         # старт находиться в первой позиции очереди
-        elif (self.start == 0):
-            self.start = self.size - 1
+        elif (self.front == 0):
+            self.front = self.size - 1
         else: # уменьшить конец части старт на единицу
-            self.start = self.start-1
+            self.front = self.front-1
         # вставить текущий элемент в Deque
-        self.arr[self.start] = value
+        self.arr[self.front] = value
 
     # добавить элемент в конец дека. 
     # Если в деке уже находится максимальное число элементов, вывести «error».
@@ -91,45 +91,20 @@ class DequeCircularBuffer:
         if (self.isEmpty()):
             print(" Underflow")
             return -1
-          
         return self.arr[self.front]
-      
-      
+
     # функция возвращает задний элемент Deque
-    def getRear(self):
+    def getBack(self):
         # проверить, пуста ли Deque или нет
-        if(self.isEmpty() or self.rear < 0):
-            print(" Underflow");
-            return -1 ;
-          
-        return self.arr[self.rear];
-    # def push(self, item: int):
-    #     self._items.append(int(item))
-    #     if (len(self._items) == 1):
-    #         self.trackDeque.append(int(item))
-    #         return
-    #     if (int(item) > self.trackDeque[-1]):
-    #         self.trackDeque.append(int(item))
-    #     else:
-    #         self.trackDeque.append(self.trackDeque[-1])
-
-    # def pop(self):
-    #     try:
-    #         self._items.pop()
-    #         self.trackDeque.pop()
-    #     except IndexError:
-    #         print('error')
-
-    # def get_max(self):
-    #     if self.trackDeque != []:
-    #         return self.trackDeque[-1]
-    #     else:
-    #         return('None')
+        if(self.isEmpty() or self.back < 0):
+            print(" Underflow")
+            return -1
+        return self.arr[self.back]
 
     # Проверяем заполнен Deque или нет.
     def isFull(self):
-        return ((self.start == 0 and self.end == self.size-1)
-                or self.start == self.end + 1)
+        return ((self.front == 0 and self.back == self.size-1)
+                or self.front == self.back + 1)
 
     # Проверяем пустой Deque или нет.
     def isEmpty(self):
@@ -137,21 +112,20 @@ class DequeCircularBuffer:
 
 
 def run_effective_deque(number_command: int,
-              max_len_deque: int, command_list: List[List[str]]):
+                        max_len_deque: int, command_list: List[List[str]]):
     max_size = max_len_deque
-    deque =  DequeCircularBuffer(max_size)
+    deque = DequeCircularBuffer(max_size)
     for command in range(0, number_command):
-        if command_list[command][0] == 'push':
-            deque.push(command_list[command][1])
-        elif command_list[command][0] == 'pop':
-            pop_value = deque.pop()
+        if command_list[command][0] == 'push_front':
+            deque.push_front(command_list[command][1])
+        elif command_list[command][0] == 'push_back':
+            deque.push_back(command_list[command][1])
+        elif command_list[command][0] == 'pop_front':
+            pop_value = deque.pop_front()
             print(pop_value)
-        elif command_list[command][0] == 'peek':
-            peek_value = deque.peek()
-            print(peek_value)
-        elif command_list[command][0] == 'size':
-            len_queue = deque.size()
-            print(len_queue)
+        elif command_list[command][0] == 'pop_back':
+            pop_value = deque.pop_back()
+            print(pop_value)
 
 
 def read_input() -> Tuple[List[List[str]]]:
