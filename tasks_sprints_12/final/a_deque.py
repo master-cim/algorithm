@@ -11,109 +11,93 @@ class DequeCircularBuffer:
         self.end = 0
         self.size = size
 
-    # Вставить элемент в начало
-    def push_front(self, value): #insertfront(self, key):
-
+    # добавить элемент в начало дека. 
+    # Если в деке уже находится максимальное число элементов, вывести «error».
+    def push_front(self, value):
         # проверка на заполненность Дека
         if (self.isFull()):
             print("Переполнено")
             return
-
         # Проверка на то что очередь в начале пуста
         if (self.start == -1):
             self.start = 0
             self.end = 0
-
-        # front is at first position of queue
+        # старт находиться в первой позиции очереди
         elif (self.start == 0):
             self.start = self.size - 1
-
-        else: # decrement front end by '1'
+        else: # уменьшить конец части старт на единицу
             self.start = self.start-1
-
-        # insert current element into Deque
+        # вставить текущий элемент в Deque
         self.arr[self.start] = value
 
-# function to inset element at rear end
-    # of Deque.
-    def insertrear(self, value):
+    # добавить элемент в конец дека. 
+    # Если в деке уже находится максимальное число элементов, вывести «error».
+    def push_back(self, value):
         if (self.isFull()):
             print(" Overflow")
             return
-          
-    
-        # If queue is initially empty
+        # Если очередь изначально пуста
         if (self.front == -1):
             self.front = 0
             self.rear = 0
-          
-    
-        # rear is at last position of queue
+
+        # END находится в последней позиции очереди
         elif (self.rear == self.size-1):
             self.rear = 0
-    
-        # increment rear end by '1'
+
+        # увеличить  конец END на '1'
         else:
-            self.rear = self.rear+1;
-           
-        # insert current element into Deque
-        self.arr[self.rear] = value ;
-      
-      
-    # Deletes element at front end of Deque
-    def deletefront(self):
-        # check whether Deque is empty or not
+            self.rear = self.rear+1
+
+        # вставить текущий элемент в Deque
+        self.arr[self.rear] = value
+
+    # вывести первый элемент дека и удалить его.
+    # Если дек был пуст, то вывести «error».
+    def pop_front(self):
+        # проверить, пуста ли Deque или нет
         if (self.isEmpty()):
-            print("Queue Underflow");
-            return ;
-          
-    
-        # Deque has only one element
+            print("Queue Underflow")
+            return
+        # Deque имеет только один элемент
         if (self.front == self.rear):
-            self.front = -1;
-            self.rear = -1;
-          
+            self.front = -1
+            self.rear = -1
         else:
-            # back to initial position
-            if (self.front == self.size -1):
-                self.front = 0;
-    
-            else: # increment front by '1' to remove current
-                # front value from Deque
-                self.front = self.front+1;
-      
-      
-    # Delete element at rear end of Deque
-    def deleterear(self):
+            # вернуться в исходное положение
+            if (self.front == self.size - 1):
+                self.front = 0
+            else: # увеличьте фронт на «1», чтобы удалить текущее значение фронта из Deque
+                self.front = self.front + 1
+
+    # вывести последний элемент дека и удалить его.
+    # Если дек был пуст, то вывести «error».
+    def pop_back(self):
         if (self.isEmpty()):
-            print(" Underflow");
-            return ;
-          
-    
-        # Deque has only one element
+            print(" Underflow")
+            return
+        # Deque имеет только один элемент
         if (self.front == self.rear):
-            self.front = -1;
-            self.rear = -1;
-          
+            self.front = -1
+            self.rear = -1
         elif (self.rear == 0):
-            self.rear = self.size-1;
+            self.rear = self.size-1
         else:
-            self.rear = self.rear-1;
+            self.rear = self.rear-1
       
-      
-    # Returns front element of Deque
+    # Возвращает передний элемент Deque
     def getFront(self):
-        # check whether Deque is empty or not
+        # проверить, пуста ли Deque или нет
         if (self.isEmpty()):
-            print(" Underflow");
-            return -1 ;
+            print(" Underflow")
+            return -1
           
-        return self.arr[self.front];
+        return self.arr[self.front]
       
       
-    # function return rear element of Deque
+    # функция возвращает задний элемент Deque
     def getRear(self):
-        # check whether Deque is empty or not
+        # проверить, пуста ли Deque или нет
         if(self.isEmpty() or self.rear < 0):
             print(" Underflow");
             return -1 ;
