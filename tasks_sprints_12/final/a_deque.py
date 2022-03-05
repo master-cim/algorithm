@@ -16,7 +16,7 @@ class DequeCircularBuffer:
     def push_front(self, value):
         # проверка на заполненность Дека
         if (self.isFull()):
-            print("Переполнено")
+            print("error")
             return
         # Проверка на то что очередь в начале пуста
         if (self.front == -1):
@@ -30,27 +30,29 @@ class DequeCircularBuffer:
         # вставить текущий элемент в Deque
         self.arr[self.front] = value
 
+
     # добавить элемент в конец дека. 
     # Если в деке уже находится максимальное число элементов, вывести «error».
     def push_back(self, value):
         if (self.isFull()):
-            print(" Overflow")
+            print("error")
             return
         # Если очередь изначально пуста
         if (self.front == -1):
             self.front = 0
-            self.rear = 0
+            self.back = 0
 
         # END находится в последней позиции очереди
-        elif (self.rear == self.size-1):
-            self.rear = 0
+        elif (self.back == self.size-1):
+            self.back = 0
 
         # увеличить  конец END на '1'
         else:
-            self.rear = self.rear+1
+            self.back = self.back+1
 
         # вставить текущий элемент в Deque
-        self.arr[self.rear] = value
+        self.arr[self.back] = value
+
 
     # вывести первый элемент дека и удалить его.
     # Если дек был пуст, то вывести «error».
@@ -60,12 +62,14 @@ class DequeCircularBuffer:
             print("Queue Underflow")
             return
         # Deque имеет только один элемент
-        if (self.front == self.rear):
+        if (self.front == self.back):
+            print(self.arr[self.front])
             self.front = -1
-            self.rear = -1
+            self.back = -1
         else:
             # вернуться в исходное положение
             if (self.front == self.size - 1):
+                print(self.arr[self.front])
                 self.front = 0
             else: # увеличьте фронт на «1», чтобы удалить текущее значение фронта из Deque
                 self.front = self.front + 1
@@ -77,13 +81,16 @@ class DequeCircularBuffer:
             print(" Underflow")
             return
         # Deque имеет только один элемент
-        if (self.front == self.rear):
+        if (self.front == self.back):
+            print(self.arr[self.back])
             self.front = -1
-            self.rear = -1
-        elif (self.rear == 0):
-            self.rear = self.size-1
+            self.back = -1
+        elif (self.back == 0):
+            print(self.arr[self.back])
+            self.back = self.size-1
         else:
-            self.rear = self.rear-1
+            print(self.arr[self.back])
+            self.back = self.back-1
       
     # Возвращает передний элемент Deque
     def getFront(self):
@@ -121,11 +128,10 @@ def run_effective_deque(number_command: int,
         elif command_list[command][0] == 'push_back':
             deque.push_back(command_list[command][1])
         elif command_list[command][0] == 'pop_front':
-            pop_value = deque.pop_front()
-            print(pop_value)
+            deque.pop_front()
         elif command_list[command][0] == 'pop_back':
-            pop_value = deque.pop_back()
-            print(pop_value)
+            deque.pop_back()
+
 
 
 def read_input() -> Tuple[List[List[str]]]:
