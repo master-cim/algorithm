@@ -13,7 +13,7 @@ class DequeCircularBuffer:
 
     def push_front(self, value):
         if (self.isFull()):
-            return
+            print("error")
         if (self.front == -1):
             self.front = 0
             self.back = 0
@@ -22,10 +22,11 @@ class DequeCircularBuffer:
         else:
             self.front = self.front - 1
         self.arr[self.front] = value
+        print(self.arr)
 
     def push_back(self, value):
         if (self.isFull()):
-            return
+            print('error')
         if (self.front == -1):
             self.front = 0
             self.back = 0
@@ -34,11 +35,11 @@ class DequeCircularBuffer:
         else:
             self.back = self.back + 1
         self.arr[self.back] = value
+        print(self.arr)
 
     def pop_front(self):
         if (self.isEmpty()):
-            return
-            
+            print('error')
         if (self.front == self.back):
             print(self.arr[self.front])
             self.front = -1
@@ -65,13 +66,11 @@ class DequeCircularBuffer:
             self.back = self.back-1
 
     def isFull(self):
-        if ((self.front == 0 and self.back == self.size-1)
-                or self.front == self.back + 1):
-            print('error')
+        return ((self.front == 0 and self.back == self.size-1)
+                or self.front == self.back + 1)
 
     def isEmpty(self):
-        if self.front == -1:
-            print('error')
+        return (self.front == -1)
 
 
 def run_effective_deque(number_command: int,
