@@ -6,7 +6,7 @@ from typing import List, Tuple
 
 class DequeCircularBuffer:
     def __init__(self, size):
-        self.queue = [None] * size
+        self.queue = []
         self.front = 0
         self.back = 0
         self.max_n = size
@@ -18,7 +18,15 @@ class DequeCircularBuffer:
             self.back = (self.back + 1) % self.max_n
             self.size += 1
         print(self.queue)
-        print(self.size)
+        print(self.back)
+
+    def push_back(self, value):
+        if self.size != self.max_n:
+            self.queue.append(value)
+            self.front = (self.front - 1) % self.max_n
+            self.size += 1
+        print(self.queue)
+        print(self.front)
 
     def pop_front(self):
         if self.isEmpty():
@@ -31,13 +39,7 @@ class DequeCircularBuffer:
         print(self.size)
         return value
 
-    def push_back(self, value):
-        if self.size != self.max_n:
-            self.queue.append(value)
-            self.front = (self.front + 1) % self.max_n
-            self.size += 1
-        print(self.queue)
-        print(self.size)
+
 
     def pop_back(self):
         if self.isEmpty():

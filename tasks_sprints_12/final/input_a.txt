@@ -1,7 +1,13 @@
-4
+10
 10
 push_front -855
 push_front 0
 push_back 844
 push_back 823
+push_front -100
+push_back -200
+push_front -150
+push_back 220
+push_front 1
+push_back 2
 
