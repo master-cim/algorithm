@@ -39,13 +39,13 @@ class DequeCircularBuffer:
         if self.queue[self.f_head] is None:
             value = self.queue[self.b_head]
             self.queue[self.b_head] = None
-            self.b_head = (self.b_head - 1) % self.max_n
+            # self.b_head = (self.b_head - 1) % self.max_n
         else:
             value = self.queue[self.f_tail-1]
-            self.queue[self.f_tail] = None
-            self.f_head = (self.f_head + 1) % self.max_n
+            self.queue[self.f_tail-1] = None
+            # self.f_head = (self.f_head + 1) % self.max_n
             self.size -= 1
-        # print(self.queue)
+        print(self.queue)
         # print(self.size)
         return value
 
