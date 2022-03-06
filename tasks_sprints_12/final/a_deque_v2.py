@@ -6,63 +6,49 @@ from typing import List, Tuple
 
 class DequeCircularBuffer:
     def __init__(self, size):
-        self.queue = [0] * size
+        self.queue = [None] * size
         self.front = 0
         self.back = 0
         self.max_n = size
         self.size = 0
 
     def push_front(self, value):
-        if (self.isFull()):
-            return
-        if (self.front == -1):
-            self.front = 0
-            self.back = 0
-        elif (self.front == 0):
-            self.front = self.size - 1
-        else:
-            self.front = self.front - 1
-        self.arr[self.front] = value
-
-    def push_back(self, value):
-        if (self.isFull()):
-            return
-        if (self.front == -1):
-            self.front = 0
-            self.back = 0
-        elif (self.back == self.size-1):
-            self.back = 0
-        else:
-            self.back = self.back + 1
-        self.arr[self.back] = value
+        if self.size != self.max_n:
+            self.queue.insert(0, value)
+            self.back = (self.back + 1) % self.max_n
+            self.size += 1
+        print(self.queue)
+        print(self.size)
 
     def pop_front(self):
-        if (self.isEmpty()):
-            return  
-        if (self.front == self.back):
-            print(self.arr[self.front])
-            self.front = -1
-            self.back = -1
-        else:
-            if (self.front == self.size - 1):
-                print(self.arr[self.front])
-                self.front = 0
-            else:
-                self.front = self.front + 1
+        if self.isEmpty():
+            return None
+        value = self.queue[self.front]
+        self.queue[self.front] = None
+        self.front = (self.front + 1) % self.max_n
+        self.size -= 1
+        print(self.queue)
+        print(self.size)
+        return value
+
+    def push_back(self, value):
+        if self.size != self.max_n:
+            self.queue.append(value)
+            self.front = (self.front + 1) % self.max_n
+            self.size += 1
+        print(self.queue)
+        print(self.size)
 
     def pop_back(self):
-        if (self.isEmpty()):
-            return
-        if (self.front == self.back):
-            print(self.arr[self.back])
-            self.front = -1
-            self.back = -1
-        elif (self.back == 0):
-            print(self.arr[self.back])
-            self.back = self.size-1
-        else:
-            print(self.arr[self.back])
-            self.back = self.back-1
+        if self.isEmpty():
+            return None
+        value = self.queue[self.back]
+        self.queue[self.back] = None
+        self.back = (self.back - 1) % self.max_n
+        self.size -= 1
+        # print(self.queue)
+        # print(self.size)
+        return value
 
     def isFull(self):
         if ((self.front == 0 and self.back == self.size-1)
@@ -70,8 +56,7 @@ class DequeCircularBuffer:
             print('error')
 
     def isEmpty(self):
-        if self.front == -1:
-            print('error')
+        return self.size == 0
 
 
 def run_effective_deque(number_command: int,
@@ -83,9 +68,9 @@ def run_effective_deque(number_command: int,
         elif command_list[command][0] == 'push_back':
             deque.push_back(command_list[command][1])
         elif command_list[command][0] == 'pop_front':
-            deque.pop_front()
+            print(deque.pop_front())
         elif command_list[command][0] == 'pop_back':
-            deque.pop_back()
+            print(deque.pop_back())
 
 
 def read_input() -> Tuple[List[List[str]]]:

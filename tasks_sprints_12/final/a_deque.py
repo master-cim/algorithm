@@ -37,7 +37,8 @@ class DequeCircularBuffer:
 
     def pop_front(self):
         if (self.isEmpty()):
-            return  
+            return
+            
         if (self.front == self.back):
             print(self.arr[self.front])
             self.front = -1
@@ -51,7 +52,7 @@ class DequeCircularBuffer:
 
     def pop_back(self):
         if (self.isEmpty()):
-            return
+            print('error')
         if (self.front == self.back):
             print(self.arr[self.back])
             self.front = -1
