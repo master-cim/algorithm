@@ -6,10 +6,11 @@ from typing import List, Tuple
 
 class DequeCircularBuffer:
     def __init__(self, size):
-        self.arr = [0] * size
-        self.front = -1
+        self.queue = [0] * size
+        self.front = 0
         self.back = 0
-        self.size = size
+        self.max_n = size
+        self.size = 0
 
     def push_front(self, value):
         if (self.isFull()):
