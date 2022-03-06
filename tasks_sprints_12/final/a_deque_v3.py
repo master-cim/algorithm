@@ -20,27 +20,33 @@ class DequeCircularBuffer:
             self.queue[self.f_tail] = value
             self.f_tail = (self.f_tail + 1) % self.max_n
             self.size += 1
-        print(self.queue)
-        print(self.f_tail)
-        print(self.size)
+        # print(self.queue)
+        # print(self.f_tail)
+        # print(self.size)
 
     def push_back(self, value):
         if self.size != self.max_n:
             self.queue[self.b_tail] = value
             self.b_tail = (self.b_tail - 1) % self.max_n
             self.size += 1
-        print(self.queue)
-        print(self.b_tail)
-                
+        # print(self.queue)
+        # print(self.b_tail)
+
+# сделать по аналогии с back
     def pop_front(self):
         if self.isEmpty():
             return 'error'
-        value = self.queue[self.f_tail-1]
-        self.queue[self.f_tail] = None
-        self.f_head = (self.f_head + 1) % self.max_n
-        self.size -= 1
-        print(self.queue)
-        print(self.size)
+        if self.queue[self.f_head] is None:
+            value = self.queue[self.b_head]
+            self.queue[self.b_head] = None
+            self.b_head = (self.b_head - 1) % self.max_n
+        else:
+            value = self.queue[self.f_tail-1]
+            self.queue[self.f_tail] = None
+            self.f_head = (self.f_head + 1) % self.max_n
+            self.size -= 1
+        # print(self.queue)
+        # print(self.size)
         return value
 
     def pop_back(self):
