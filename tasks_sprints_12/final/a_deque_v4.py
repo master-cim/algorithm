@@ -26,36 +26,38 @@ class DequeCircularBuffer:
             self.queue[self.f_tail] = value
             self.f_tail = (self.f_tail + 1) % self.max_n
             self.size += 1
-        # print(f'PUSH_FRONT {value} {self.queue}')
-        # print(f'B-голова {self.queue[self.b_head]} индекс {[self.b_head]}')
-        # print(f'B-хвост {self.queue[self.b_tail]} индекс {[self.b_tail]}')
-        # print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
-        # print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
+        print(f'PUSH_FRONT {value} {self.queue}')
+        print(f'B-голова {self.queue[self.b_head]} индекс {[self.b_head]}')
+        print(f'B-хвост {self.queue[self.b_tail]} индекс {[self.b_tail]}')
+        print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
+        print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
 
     def push_back(self, value):
+        print(self.size)
         if self.isFull():
             print('error')
         if self.size != self.max_n:
             self.queue[self.b_tail] = value
             self.b_tail = (self.b_tail - 1) % self.max_n
             self.size += 1
-        # print(f'PUSH_BACK {value} {self.queue}')
-        # print(f'B-голова {self.queue[self.b_head]} индекс {[self.b_head]}')
-        # print(f'B-хвост {self.queue[self.b_tail]} индекс {[self.b_tail]}')
-        # print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
-        # print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
+            print(f'PUSH_BACK {value} {self.queue}')
+            print(f'B-голова {self.queue[self.b_head]} индекс {[self.b_head]}')
+            print(f'B-хвост {self.queue[self.b_tail]} индекс {[self.b_tail]}')
+            print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
+            print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
+            
 
     def pop_front(self):
-        # print(f'POP_FRONT {self.queue}')
-        # print(f'B-голова {self.queue[self.b_head]} индекс {[self.b_head]}')
-        # print(f'B-хвост {self.queue[self.b_tail]} индекс {[self.b_tail]}')
-        # print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
-        # print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
+        print(f'POP_FRONT {self.queue}')
+        print(f'B-голова {self.queue[self.b_head]} индекс {[self.b_head]}')
+        print(f'B-хвост {self.queue[self.b_tail]} индекс {[self.b_tail]}')
+        print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
+        print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
         if self.isEmpty():
-            # print(f'POP_FRONT Empty {self.queue}')
+            print(f'POP_FRONT Empty {self.queue}')
             return 'error'
         if self.queue[self.f_head] is None:
-            # print(f'POP_FRONT None {self.queue}')
+            print(f'POP_FRONT None {self.queue}')
             value = self.queue[self.b_head]
             self.queue[self.b_head] = None
             self.b_head = (self.b_head - 1) % self.max_n
@@ -63,7 +65,7 @@ class DequeCircularBuffer:
             self.f_tail = (self.f_tail - 1) % self.max_n
             self.size -= 1
         else:
-            # print(f'POP_FRONT {self.queue}')
+            print(f'POP_FRONT {self.queue}')
             value = self.queue[self.f_tail-1]
             self.queue[self.f_tail-1] = None
             self.f_tail = (self.f_tail - 1) % self.max_n
@@ -76,14 +78,14 @@ class DequeCircularBuffer:
         # print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
         # print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
         if self.isEmpty():
-            # print(f'POP_BACK Empty')
+            print(f'POP_BACK Empty')
             return 'error'
         if self.isFull():
-            # print(f'POP_BACK FULL')
-            value = self.queue[self.f_head]
-            self.queue[self.f_head] = None
-            self.f_head = (self.f_head + 1) % self.max_n
-            self.b_head = (self.b_head + 1) % self.max_n
+            print(f'POP_BACK FULL')
+            value = self.queue[(self.b_tail + 1) % self.max_n]
+            self.queue[(self.b_tail + 1) % self.max_n] = None
+            # self.f_head = (self.f_head + 1) % self.max_n
+            # self.b_head = (self.b_head + 1) % self.max_n
             self.b_tail = (self.b_tail + 1) % self.max_n
             self.size -= 1
             # print(f'B-голова {self.queue[self.b_head]} индекс {[self.b_head]}')
@@ -91,7 +93,7 @@ class DequeCircularBuffer:
             # print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
             # print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
         elif self.queue[self.b_head] is None:
-            # print(f'POP_BACK IS NONE')
+            print(f'POP_BACK IS NONE')
             value = self.queue[self.f_head]
             self.queue[self.f_head] = None
             self.f_head = (self.f_head + 1) % self.max_n
@@ -103,7 +105,7 @@ class DequeCircularBuffer:
             # print(f'F-голова{self.queue[self.f_head]} индекс {[self.f_head]}')
             # print(f'F-хвост{self.queue[self.f_tail]} индекс {[self.f_tail]}')
         else:
-            # print(f'POP_BACK {self.queue}')
+            print(f'POP_BACK {self.queue}')
             value = self.queue[(self.b_tail + 1) % self.max_n]
             self.queue[(self.b_tail + 1) % self.max_n] = None
             self.b_tail = (self.b_tail + 1) % self.max_n
