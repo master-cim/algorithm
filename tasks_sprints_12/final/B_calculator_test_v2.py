@@ -1,29 +1,28 @@
 # B. Калькулятор
-# ID успешной посылки
+# ID успешной посылки 65886740
 from typing import Tuple
 import operator
+
+OPERATORS = {
+    '-': operator.sub,
+    '+': operator.add,
+    '*': operator.mul,
+    '/': operator.floordiv
+}
 
 
 def calculator(put_items: Tuple[str]):
     stack_items = []
     list_operations = ('-', '+', '*', '/')
-    ops = {
-        '+': operator.add,
-        '-': operator.sub,
-        '*': operator.mul,
-        '/': operator.truediv
-        }
     for step in range(0, len(put_items)):
         if put_items[step] not in list_operations:
             stack_items.append(put_items[step])
         else:
-            op_char = stack_items[step]
             x = stack_items.pop(-2)
             y = stack_items.pop(-1)
-            expr = ops[op_char]
-            result = expr(x, y)
-            stack_items.append(result)
-    print(int(stack_items[-1]))
+            operator = OPERATORS[put_items[step]]
+            stack_items.append(operator(float(x), float(y)))
+    return(int(stack_items[-1]))
 
 
 def read_input() -> Tuple[str]:
@@ -33,4 +32,4 @@ def read_input() -> Tuple[str]:
 
 if __name__ == '__main__':
     put_items = read_input()
-    calculator(put_items)
+    print(calculator(put_items))

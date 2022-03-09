@@ -4,11 +4,12 @@ from __future__ import division
 from typing import Tuple
 import operator
 
-ops = {
-    '+': operator.add,
+
+OPERATORS = {
     '-': operator.sub,
-    '*': operator.mul,
-    '/': operator.truediv
+   '+': operator.add,
+   '*': operator.mul,
+   '/': operator.floordiv
 }
 
 
@@ -48,12 +49,13 @@ def calculator(put_items: Tuple[str]):
             y = stack_items.pop(-1)
             o = stack_opr.pop()
             print(f'Выражение {x} {o} {y}')
-            expr = MyCalculate(x, y)
-            dic_match_fn_to_opr = {'-': expr.subtraction(x, y),
-                                   '+': expr.addition(x, y),
-                                   '*': expr.multiplication(x, y),
-                                   '/': expr.devision(x, y)}
-            stack_items.append(dic_match_fn_to_opr.get(o))
+            # expr = MyCalculate(x, y)
+            # dic_match_fn_to_opr = {'-': expr.subtraction(x, y),
+            #                        '+': expr.addition(x, y),
+            #                        '*': expr.multiplication(x, y),
+            #                        '/': expr.devision(x, y)}
+            operator = OPERATORS[put_items[step]]
+            stack_items.append(operator(x, y))
         print(f'Промежуточный результат {int(stack_items[-1])}')
 
 
