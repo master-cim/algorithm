@@ -2,33 +2,40 @@
 # ID успешной посылки
 from __future__ import division
 from typing import Tuple
+import operator
+
+ops = {
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.truediv
+}
 
 
-class MyCalculate:
-    def __init__(self, val_x, val_y):
-        self.value_x = val_x
-        self.value_y = val_y
+# class MyCalculate:
+#     def __init__(self, val_x, val_y):
+#         self.value_x = val_x
+#         self.value_y = val_y
 
-    def multiplication(self, value_x, value_y):
-        return int(value_x) * int(value_y)
+#     def multiplication(self, value_x, value_y):
+#         return int(value_x) * int(value_y)
 
-    def devision(self, value_x, value_y):
-        result = float(value_x) / float(value_y)
-        if result <= 0:
-            return round(result)
-        return result
+#     def devision(self, value_x, value_y):
+#         result = float(value_x) / float(value_y)
+#         if result <= 0:
+#             return round(result)
+#         return result
 
-    def subtraction(self, value_x, value_y):
-        return (value_x) - (value_y)
+#     def subtraction(self, value_x, value_y):
+#         return (value_x) - (value_y)
 
-    def addition(self, value_x, value_y):
-        return int(value_x) + int(value_y)
+#     def addition(self, value_x, value_y):
+#         return int(value_x) + int(value_y)
 
 
 def calculator(put_items: Tuple[str]):
     stack_items = []
     stack_opr = []
-    # top = -1
     list_operations = ('-', '+', '*', '/')
     for step in range(0, len(put_items)):
         if put_items[step] not in list_operations:
