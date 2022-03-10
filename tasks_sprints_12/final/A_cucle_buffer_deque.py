@@ -6,74 +6,74 @@ from typing import List, Tuple
 
 class DequeCircularBuffer:
     def __init__(self, size):
-        self.queue = [None] * size
-        self.f_head = 0
-        self.f_tail = 0
-        self.b_head = size - 1
-        self.b_tail = size - 1
-        self.max_n = size
-        self.size = 0
+        self.__queue = [None] * size
+        self.__f_head = 0
+        self.__f_tail = 0
+        self.__b_head = size - 1
+        self.__b_tail = size - 1
+        self.__max_n = size
+        self.__size = 0
 
     def push_front(self, value):
         if self.isFull():
             print('error')
-        if self.size != self.max_n:
-            self.queue[self.f_tail] = value
-            self.f_tail = (self.f_tail + 1) % self.max_n
-            self.size += 1
+        if self.__size != self.__max_n:
+            self.__queue[self.__f_tail] = value
+            self.__f_tail = (self.__f_tail + 1) % self.__max_n
+            self.__size += 1
 
     def push_back(self, value):
         if self.isFull():
             print('error')
-        if self.size != self.max_n:
-            self.queue[self.b_tail] = value
-            self.b_tail = (self.b_tail - 1) % self.max_n
-            self.size += 1
+        if self.__size != self.__max_n:
+            self.__queue[self.__b_tail] = value
+            self.__b_tail = (self.__b_tail - 1) % self.__max_n
+            self.__size += 1
 
     def pop_front(self):
         if self.isEmpty():
             return 'error'
-        if self.queue[self.f_head] is None:
-            value = self.queue[self.b_head]
-            self.queue[self.b_head] = None
-            self.b_head = (self.b_head - 1) % self.max_n
-            self.f_head = (self.f_head - 1) % self.max_n
-            self.f_tail = (self.f_tail - 1) % self.max_n
-            self.size -= 1
+        if self.__queue[self.__f_head] is None:
+            value = self.__queue[self.__b_head]
+            self.__queue[self.__b_head] = None
+            self.__b_head = (self.__b_head - 1) % self.__max_n
+            self.__f_head = (self.__f_head - 1) % self.__max_n
+            self.__f_tail = (self.__f_tail - 1) % self.__max_n
+            self.__size -= 1
         else:
-            value = self.queue[self.f_tail-1]
-            self.queue[self.f_tail-1] = None
-            self.f_tail = (self.f_tail - 1) % self.max_n
-            self.size -= 1
+            value = self.__queue[self.__f_tail-1]
+            self.__queue[self.__f_tail-1] = None
+            self.__f_tail = (self.__f_tail - 1) % self.__max_n
+            self.__size -= 1
         return value
 
     def pop_back(self):
         if self.isEmpty():
             return 'error'
         if self.isFull():
-            value = self.queue[(self.b_tail + 1) % self.max_n]
-            self.queue[(self.b_tail + 1) % self.max_n] = None
-            self.b_tail = (self.b_tail + 1) % self.max_n
-            self.size -= 1
-        elif self.queue[self.b_head] is None:
-            value = self.queue[self.f_head]
-            self.queue[self.f_head] = None
-            self.f_head = (self.f_head + 1) % self.max_n
-            self.b_head = (self.b_head + 1) % self.max_n
-            self.b_tail = (self.b_tail + 1) % self.max_n
-            self.size -= 1
+            value = self.__queue[(self.__b_tail + 1) % self.__max_n]
+            self.__queue[(self.__b_tail + 1) % self.__max_n] = None
+            self.__b_tail = (self.__b_tail + 1) % self.__max_n
+            self.__size -= 1
+        elif self.__queue[self.__b_head] is None:
+            value = self.__queue[self.__f_head]
+            self.__queue[self.__f_head] = None
+            self.__f_head = (self.__f_head + 1) % self.__max_n
+            self.__b_head = (self.__b_head + 1) % self.__max_n
+            self.__b_tail = (self.__b_tail + 1) % self.__max_n
+            self.__size -= 1
         else:
-            value = self.queue[(self.b_tail + 1) % self.max_n]
-            self.queue[(self.b_tail + 1) % self.max_n] = None
-            self.b_tail = (self.b_tail + 1) % self.max_n
-            self.size -= 1
+            value = self.__queue[(self.__b_tail + 1) % self.__max_n]
+            self.__queue[(self.__b_tail + 1) % self.__max_n] = None
+            self.__b_tail = (self.__b_tail + 1) % self.__max_n
+            self.__size -= 1
         return value
 
     def isFull(self):
-        return self.size == self.max_n
+        return self.__size == self.__max_n
 
     def isEmpty(self):
-        return self.size == 0
+        return self.__size == 0
 
 
 def run_effective_deque(number_command: int,
