@@ -11,6 +11,7 @@ class Error(Exception):
 class DequeIsFullError(Error):
     pass
 
+
 class DequeIsEmptyError(Error):
     pass
 
@@ -79,12 +80,6 @@ class DequeCircularBuffer:
             self.__b_tail = (self.__b_tail + 1) % self.__max_n
             self.__size -= 1
         return value
-
-    def _is_full(self):
-        return self.__size == self.__max_n
-
-    def _is_empty(self):
-        return self.__size == 0
 
 
 def run_effective_deque(number_command: int,
