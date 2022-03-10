@@ -14,24 +14,24 @@ class DequeCircularBuffer:
         self.__max_n = size
         self.__size = 0
 
-    def push_front(self, value):
-        if self.isFull():
+    def _push_front(self, value):
+        if self.__size == self.__max_n:
             print('error')
         if self.__size != self.__max_n:
             self.__queue[self.__f_tail] = value
             self.__f_tail = (self.__f_tail + 1) % self.__max_n
             self.__size += 1
 
-    def push_back(self, value):
-        if self.isFull():
+    def _push_back(self, value):
+        if self.__size == self.__max_n:
             print('error')
         if self.__size != self.__max_n:
             self.__queue[self.__b_tail] = value
             self.__b_tail = (self.__b_tail - 1) % self.__max_n
             self.__size += 1
 
-    def pop_front(self):
-        if self.isEmpty():
+    def _pop_front(self):
+        if self._is_empty():
             return 'error'
         if self.__queue[self.__f_head] is None:
             value = self.__queue[self.__b_head]
@@ -47,10 +47,10 @@ class DequeCircularBuffer:
             self.__size -= 1
         return value
 
-    def pop_back(self):
-        if self.isEmpty():
+    def _pop_back(self):
+        if self._is_empty():
             return 'error'
-        if self.isFull():
+        if self._is_full():
             value = self.__queue[(self.__b_tail + 1) % self.__max_n]
             self.__queue[(self.__b_tail + 1) % self.__max_n] = None
             self.__b_tail = (self.__b_tail + 1) % self.__max_n
@@ -69,10 +69,10 @@ class DequeCircularBuffer:
             self.__size -= 1
         return value
 
-    def isFull(self):
+    def _is_full(self):
         return self.__size == self.__max_n
 
-    def isEmpty(self):
+    def _is_empty(self):
         return self.__size == 0
 
 
@@ -81,13 +81,13 @@ def run_effective_deque(number_command: int,
     deque = DequeCircularBuffer(max_len_deque)
     for command in range(0, number_command):
         if command_list[command][0] == 'push_front':
-            deque.push_front(command_list[command][1])
+            deque._push_front(command_list[command][1])
         elif command_list[command][0] == 'push_back':
-            deque.push_back(command_list[command][1])
+            deque._push_back(command_list[command][1])
         elif command_list[command][0] == 'pop_front':
-            print(deque.pop_front())
+            print(deque._pop_front())
         elif command_list[command][0] == 'pop_back':
-            print(deque.pop_back())
+            print(deque._pop_back())
 
 
 def read_input() -> Tuple[List[List[str]]]:
