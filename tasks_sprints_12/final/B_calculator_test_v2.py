@@ -34,9 +34,9 @@ def calculator(put_items: Tuple[str]):
     for step in range(0, len(put_items)):
         if put_items[step] in OPERATORS:
             method = getattr(operator, OPERATORS.get(put_items[step]))
-            first_out_one = stack_items.pop()
-            first_out_two = stack_items.pop()
-            stack_items.push(method(first_out_two, first_out_one))
+            first_operand = stack_items.pop()
+            second_operand = stack_items.pop()
+            stack_items.push(method(first_operand, second_operand))
         else:
             stack_items.push(int(put_items[step]))
     return stack_items.pop()
