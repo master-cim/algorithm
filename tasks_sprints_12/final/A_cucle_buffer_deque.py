@@ -1,6 +1,7 @@
 # Задача A. Дек
 # ID успешной посылки 	65850972
-# ID успешной посылки 65930403
+# ID успешной посылки перехват исключения 65930403
+# ID успешной посылки c использованием getattr 65930764
 
 from typing import List, Tuple
 
@@ -94,14 +95,13 @@ def run_effective_deque(number_command: int,
     deque = DequeCircularBuffer(max_len_deque)
     for command in range(0, number_command):
         try:
-            if command_list[command][0] == 'push_front':
-                deque.push_front(command_list[command][1])
-            elif command_list[command][0] == 'push_back':
-                deque.push_back(command_list[command][1])
-            elif command_list[command][0] == 'pop_front':
-                print(deque.pop_front())
-            elif command_list[command][0] == 'pop_back':
-                print(deque.pop_back())
+            if (command_list[command][0] == 'push_front'
+               or command_list[command][0] == 'push_back'):
+                result = getattr(deque, command_list[command][0])
+                result((command_list[command][1]))
+            else:
+                result = getattr(deque, command_list[command][0])
+                print(result())
         except DequeIsFullError:
             print('error')
         except DequeIsEmptyError:
