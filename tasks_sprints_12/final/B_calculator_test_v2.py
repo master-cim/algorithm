@@ -25,9 +25,6 @@ class StackOperands:
         except IndexError:
             print('error')
 
-    def __repr__(self):
-        return f'{self.__items}'
-
 
 def calculator(put_items: Tuple[str]):
     stack_items = StackOperands()
