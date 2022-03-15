@@ -11,8 +11,8 @@ def amount_for_bike(cash_per_day, cost_bike, left, right):
     #         break
     #     else:
     #         print(-1)
-    result = [cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike][0]
-    # result = next(cash_per_day.index(x) for x in cash_per_day if cash_per_day[x] >= cost_bike)
+    # result = [cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike][0]
+    result = next((cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike), '-1')
     return result
     
     # mid = (left + right) // 2
