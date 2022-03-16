@@ -1,23 +1,18 @@
 # L. Два велосипеда
-# ID успешной посылки 
+# ID успешной посылки 66093576
 
 
 def amount_for_bike(cash_per_day, cost_bike, left, right):
-    if right <= left:
+    if (right <= left and left != 0):
         return -1
-    mid = (left + right) // 2
-    if cash_per_day[mid] >= cost_bike:
-        mid = next(
-            (cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike),
-            '-1')
-        return mid
-    elif cash_per_day[mid] > cost_bike:
-        result = amount_for_bike(cash_per_day, cost_bike, left, mid-1)
-        return result
+    middle = (left + right) // 2
+    if (cash_per_day[middle] >= cost_bike and (cash_per_day[middle - 1] < cost_bike or middle == 0)):
+        return middle + 1
+    elif cost_bike <= cash_per_day[middle]:
+        return amount_for_bike(cash_per_day, cost_bike, left, middle)
     else:
-        result = amount_for_bike(cash_per_day, cost_bike, mid+1, right)
-        return result
-
+        return amount_for_bike(cash_per_day, cost_bike, middle + 1, right)
+    
 
 def read_input():
     number_days = int(input())
