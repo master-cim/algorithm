@@ -1,15 +1,21 @@
-def binarySearch(money, price, left, right):
-    if (right <= left and left != 0):
-        return -1
-    middle = (left + right) // 2
-    if (money[middle] >= price and (money[middle - 1] < price or middle == 0)):
-        return middle + 1
-    elif price <= money[middle]:
-        return binarySearch(money, price, left, middle)
-    else:
-        return binarySearch(money, price, middle + 1, right)
-days = int(input())
-money = [int(num) for num in input().split(' ')]
-price = int(input())
-print(binarySearch(money, price, left = 0, right = len(money)), end=' ')
-print(binarySearch(money, price * 2, left = 0, right = len(money)), end=' ')
+def letterCombinations(digits):
+    letters = {'2':'abc', '3':'def','4':'ghi', '5':'jkl', '6':'mno', '7':'pqrs','8':'tuv', '9':'wxyz'}
+    
+    def backtrack(digits, path, res):
+        if digits == '':
+            res.append(path)
+            return
+        for letter in letters[digits[0]]:
+            path += letter
+            backtrack(digits[1:], path, res)
+            path = path[:-1]
+    res = []
+    backtrack(digits, '', res)
+    for x in res:
+        print(x, end=' ')
+
+
+if __name__ == '__main__':
+    vvod = (input())
+    print(vvod)
+    letterCombinations(vvod)
