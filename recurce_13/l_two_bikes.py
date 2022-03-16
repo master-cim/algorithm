@@ -3,24 +3,24 @@
 
 
 def amount_for_bike(cash_per_day, cost_bike, left, right):
-    # if right <= left:
-    #     return -1
-    # for x in cash_per_day:
-    #     if x >= cost_bike:
-    #         print(cash_per_day.index(x)+1)
-    #         break
-    #     else:
-    #         print(-1)
+    if right <= left:
+        return -1
     # result = [cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike][0]
-    result = next((cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike), '-1')
-    return result
+    # result = next((cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike), '-1')
+    # return result
+    mid = (left + right) // 2
+    if cost_bike <= cash_per_day[mid]:
+
+        # result = next((cash_per_day.index(x)+1 for x in cash_per_day if x >= cost_bike), '-1')
+        return amount_for_bike(cash_per_day, cost_bike, left, mid)
+    else:
+        return amount_for_bike(cash_per_day, cost_bike, mid+1, right)
     
     # mid = (left + right) // 2
     # if cash_per_day[mid] == cost_bike:
-        
-    #     return result
+    #     return mid
     # elif cost_bike < cash_per_day[mid]:
-    #     return amount_for_bike(cash_per_day, cost_bike, left, mid+1)
+    #     return amount_for_bike(cash_per_day, cost_bike, left, mid)
     # else:
     #     return amount_for_bike(cash_per_day, cost_bike, mid+1, right)
 
