@@ -1,48 +1,57 @@
 # K. Сортировка слиянием
-# ID успешной посылки
+# ID успешной посылки 66168140
 
-
-def merge(array, left_subarr, right_subarr):
+def merge_sort(array, beg, end):
+    if len(array) == 1:
+        return array
+    mid = len(array)//2
+    l_subarr = array[beg:mid]
+    r_subarr = array[mid:end]
+    merge_sort(l_subarr, beg, end)
+    merge_sort(r_subarr, beg, end)
     i = j = k = 0
-    # Copy data to temp arrays left_subarr[] and right_subarr[]
-    while i < len(left_subarr) and j < len(right_subarr):
-        if left_subarr[i] < right_subarr[j]:
-            array[k] = left_subarr[i]
+    while i < len(l_subarr) and j < len(r_subarr):
+        if l_subarr[i] < r_subarr[j]:
+            array[k] = l_subarr[i]
             i += 1
         else:
-            array[k] = right_subarr[j]
+            array[k] = r_subarr[j]
             j += 1
         k += 1
-
-    # Checking if any element was left
-    while i < len(left_subarr):
-        array[k] = left_subarr[i]
+    while i < len(l_subarr):
+        array[k] = l_subarr[i]
         i += 1
         k += 1
-
-    while j < len(right_subarr):
-        array[k] = right_subarr[j]
+    while j < len(r_subarr):
+        array[k] = r_subarr[j]
         j += 1
         k += 1
+    return(array)
 
 
-def merge_sort(array, left_subarr, mid, right_subarr):
-    if len(array) > 1:
-
-        # Finding the mid of the array
-        # mid = len(array)//2
-
-        # Dividing the array elements
-        left_subarr = array[:mid]
-
-        # into 2 halves
-        right_subarr = array[mid:]
-
-        # Sorting the first half
-        merge_sort(left_subarr)
-
-        # Sorting the second half
-        merge_sort(right_subarr)
+def merge(array, beg, mid, end):
+    left_sub = array[beg:mid]
+    right_sub = array[mid:end]
+    left_arr = merge_sort(left_sub, beg, mid)
+    right_arr = merge_sort(right_sub, 0, len(right_sub))
+    i = j = k = 0
+    while i < len(left_arr) and j < len(right_arr):
+        if left_arr[i] < right_arr[j]:
+            array[k] = left_arr[i]
+            i += 1
+        else:
+            array[k] = right_arr[j]
+            j += 1
+        k += 1
+    while i < len(left_arr):
+        array[k] = left_arr[i]
+        i += 1
+        k += 1
+    while j < len(right_arr):
+        array[k] = right_arr[j]
+        j += 1
+        k += 1
+    return array
 
 
 def test():
@@ -56,17 +65,6 @@ def test():
     assert c == expected
 
 
-def print_sorted_arr(array):
-    for i in range(len(array)):
-        print(array[i], end=' ')
-    print()
-
-
-# Driver Code
 if __name__ == '__main__':
-    array = [12, 11, 13, 5, 6, 7]
-    print("Given array is", end="\n")
-    print_sorted_arr(array)
-    merge_sort(array)
-    print("Sorted array is: ", end="\n")
-    print_sorted_arr(array)
+    test()
+
