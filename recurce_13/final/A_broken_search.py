@@ -10,9 +10,21 @@ def broken_search(nums, target) -> int:
             right_border = mid - 1
         else:
             left_border = mid + 1
-    return -1
+    return 1
+
+
+def read_input():
+    _ = input()
+    target = int(input())
+    nums = [int(element) for element in input().strip().split()]
+    return(target, nums)
 
 
 def test():
     arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
     assert broken_search(arr, 5) == 6
+
+
+if __name__ == '__main__':
+    target, nums = read_input()
+    print(broken_search(nums, target))
