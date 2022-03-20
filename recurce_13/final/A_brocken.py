@@ -1,24 +1,31 @@
+# A. Поиск в сломанном массиве
+# ID успешной посылки 66234615
+
 def broken_search(nums, target) -> int:
     left_border = 0
     right_border = len(nums) - 1
     while left_border <= right_border:
-        middle = (left_border + right_border) // 2
-        if nums[middle] == target:
-            return middle
-        if nums[left_border] <= nums[middle]:
-            if (nums[left_border] <= target < nums[middle]
-                or nums[middle] > target >= nums[right_border]):
-                right_border = middle - 1
+        mid = (left_border + right_border) // 2
+        if nums[mid] == target:
+            return mid
+        if nums[left_border] <= nums[mid]:
+            if nums[left_border] <= target < nums[mid]:
+                right_border = mid - 1
             else:
-                left_border = middle + 1
+                left_border = mid + 1
+        else: 
+            if nums[mid] < target <= nums[right_border]:
+                left_border = mid + 1
+            else:
+                right_border = mid - 1
     return -1
 
 
-def read_input():
-    _ = input()
-    target = int(input())
-    nums = [int(element) for element in input().strip().split()]
-    return(target, nums)
+# def read_input():
+#     _ = input()
+#     target = int(input())
+#     nums = [int(element) for element in input().strip().split()]
+#     return(target, nums)
 
 
 def test():
@@ -26,6 +33,6 @@ def test():
     assert broken_search(arr, 5) == 6
 
 
-if __name__ == '__main__':
-    target, nums = read_input()
-    print(broken_search(nums, target))
+# if __name__ == '__main__':
+#     target, nums = read_input()
+#     print(broken_search(nums, target))
