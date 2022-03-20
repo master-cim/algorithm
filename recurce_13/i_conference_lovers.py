@@ -2,14 +2,22 @@
 # ID успешной посылки
 from collections import Counter
 # from typing import List
+# from functools import reduce
 
 
 def conference_lovers(id_university, k):
     number_participant = Counter(id_university)
     k_max = number_participant.most_common()[0:k:]
     result = [univer[0] for univer in k_max]
-
-    print(' '.join(map(str, result)))
+    # result = reduce(lambda x, y: dict(x.items()+[(y, x[y]+1 if y in x else 1)]),
+    #                 id_university, dict())
+    result = dict((x, id_university.count(x)) for x in set(id_university) if id_university.count(x) > 1)
+    # count_id = 0
+    # for step in range(0, len(id_university)):
+    #     if id_university[step] == id_university[step+1]:
+    #         count_id += 1
+    print(result)  
+    # print(' '.join(map(str, result)))
 
 
 def partition(start, end, array):
