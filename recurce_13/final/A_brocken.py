@@ -6,15 +6,14 @@ def broken_search(nums, target) -> int:
         if nums[middle] == target:
             return middle
         if nums[left_border] <= nums[middle]:
-            if nums[left_border] <= target < nums[middle]:
+            if (nums[left_border] <= target < nums[middle]
+                or nums[middle] > target >= nums[right_border]):
                 right_border = middle - 1
             else:
                 left_border = middle + 1
-        else:
-            if nums[middle] < target <= nums[right_border]:
-                left_border = middle + 1
-            else:
-                right_border = middle - 1
     return -1
-arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
-broken_search(arr, 5)
+
+
+def test():
+    arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
+    assert broken_search(arr, 5) == 6
