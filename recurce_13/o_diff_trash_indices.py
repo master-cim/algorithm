@@ -3,12 +3,7 @@
 
 
 def diff_index(numb, square):
-    deep_arr = 0
-    numb = numb - 1
-    while numb >= 1:
-        deep_arr += numb
-        numb -= 1
-    diff = [''] * deep_arr
+    diff = [''] * (numb * (numb-1) // 2)
     idx = 0
     while square != []:
         i = square.pop()
@@ -36,6 +31,33 @@ def counting_sort(arr, k_position):
     return arr[k_position-1]
 
 
+def quick_sort(diff, left, right):
+    """
+    Отсортировать список методом быстрой сортировки
+    """
+    def subpart():
+        pivot_competitors = (diff[left])
+        start = left + 1
+        end = right - 1
+        while True:
+            if (start <= end and diff[end] > pivot_competitors):
+                end -= 1
+            elif (start <= end and diff[start] < pivot_competitors):
+                start += 1
+            elif ((diff[end] > pivot_competitors)
+                  or (diff[start] < pivot_competitors)):
+                continue
+            if start <= end:
+                diff[start], diff[end] = (diff[end], diff[start])
+            else:
+                diff[left], diff[end] = (diff[end], diff[left])
+                return end
+    if right - left > 1:
+        pivot = subpart()
+        quick_sort(diff, left, pivot)
+        quick_sort(diff, pivot + 1, right)
+
+
 def read_input():
     numb = int(input())
     square = [int(element) for element in input().strip().split()]
@@ -45,4 +67,9 @@ def read_input():
 
 if __name__ == '__main__':
     numb, square, k_position = read_input()
-    print(counting_sort(diff_index(numb, square), k_position))
+    diff = diff_index(numb, square)
+    if len(diff) > 100:
+        left = 0
+        print(quick_sort(diff, left, right=len(diff)))
+    else:
+        print(counting_sort(diff, k_position))
