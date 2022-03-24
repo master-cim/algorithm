@@ -3,13 +3,11 @@
 
 
 def diff_index(numb, square):
-    diff = [''] * (numb * (numb-1) // 2)
-    idx = 0
+    diff = []
     while square != []:
         i = square.pop()
         for j in square:
-            diff[idx] = abs(j-i)
-            idx += 1
+            diff.append(abs(j-i))
     return(diff)
 
 
