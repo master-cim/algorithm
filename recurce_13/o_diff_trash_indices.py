@@ -13,7 +13,8 @@ def diff_index(numb, square):
     return(diff)
 
 
-def counting_sort(arr, k_position):
+def counting_sort(arr):
+    '''Отсортировать список методом подсчета'''
     max_element = int(max(arr))
     min_element = int(min(arr))
     range_of_elements = max_element - min_element + 1
@@ -28,34 +29,69 @@ def counting_sort(arr, k_position):
         count_arr[arr[i] - min_element] -= 1
     for i in range(0, len(arr)):
         arr[i] = output_arr[i]
-    return arr[k_position-1]
+    return arr
 
 
-def quick_sort(diff, left, right):
-    """
-    Отсортировать список методом быстрой сортировки
-    """
-    def subpart():
-        pivot_competitors = (diff[left])
-        start = left + 1
-        end = right - 1
-        while True:
-            if (start <= end and diff[end] > pivot_competitors):
-                end -= 1
-            elif (start <= end and diff[start] < pivot_competitors):
-                start += 1
-            elif ((diff[end] > pivot_competitors)
-                  or (diff[start] < pivot_competitors)):
-                continue
-            if start <= end:
-                diff[start], diff[end] = (diff[end], diff[start])
-            else:
-                diff[left], diff[end] = (diff[end], diff[left])
-                return end
-    if right - left > 1:
-        pivot = subpart()
-        quick_sort(diff, left, pivot)
-        quick_sort(diff, pivot + 1, right)
+def merge_sort(array):
+    if len(array) == 1:
+        return array
+    mid = len(array)//2
+    left = merge_sort(array[0:mid])
+    right = merge_sort(array[mid:len(array)])
+    i = r = k = 0
+    while i < len(left) and r < len(right):
+        if left[i] < right[r]:
+            array[k] = left[i]
+            i += 1
+        else:
+            array[k] = right[r]
+            r += 1
+        k += 1
+    while i < len(left):
+        array[k] = left[i]
+        i += 1
+        k += 1
+    while r < len(right):
+        array[k] = right[r]
+        r += 1
+        k += 1
+    return array
+
+
+def merge(sub_arrays):
+    '''Отсортировать список методом слияния'''
+    print('Отсортировать список методом слияния')
+    array = [''] * (numb * (numb-1) // 2)
+    left_part = merge_sort(sub_arrays[0])
+    right_part = merge_sort(sub_arrays[1])
+    i = j = k = 0
+    while i < len(left_part) and j < len(right_part):
+        if left_part[i] < right_part[j]:
+            array[k] = left_part[i]
+            i += 1
+        else:
+            array[k] = right_part[j]
+            j += 1
+        k += 1
+    while i < len(left_part):
+        array[k] = left_part[i]
+        i += 1
+        k += 1
+    while j < len(right_part):
+        array[k] = right_part[j]
+        j += 1
+        k += 1
+    return array
+
+
+def get_position(arr, k_position):
+    return(arr[k_position-1])
+
+
+def func_chunks_generators(lst, n):
+    for x in range(0, len(lst), n):
+        e_c = lst[x: n + x]
+        yield e_c
 
 
 def read_input():
@@ -68,8 +104,9 @@ def read_input():
 if __name__ == '__main__':
     numb, square, k_position = read_input()
     diff = diff_index(numb, square)
-    if len(diff) > 100:
-        left = 0
-        print(quick_sort(diff, left, right=len(diff)))
+    len_arr = len(diff)
+    if len_arr >= 10:
+        sub_arrays = list(func_chunks_generators(diff, len_arr//2))
+        print(get_position(merge(sub_arrays), k_position))
     else:
-        print(counting_sort(diff, k_position))
+        print(get_position(counting_sort(diff), k_position))
