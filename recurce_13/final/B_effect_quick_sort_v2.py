@@ -40,11 +40,14 @@ def transform_array(competitors):
 def read_input():
     number = int(input())
     competitors = [transform_array(input().split()) for _ in range(number)]
+    print(competitors)
     return(competitors, number)
 
 
 if __name__ == '__main__':
     competitors, number = read_input()
     left = 0
+    
     quick_sort(competitors, left, number)
+    print(competitors)
     print(*(list(zip(*competitors))[2]), sep="\n")
