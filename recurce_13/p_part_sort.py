@@ -2,6 +2,13 @@
 # ID успешной посылки
 
 
+def subtraction_items(square):
+    while square != []:
+        i = square.pop()
+        for item in square:
+            yield item - i
+
+
 def partial_sorting(numb, arr):
     pr_less_bf = 0
     pr_big_bf = 0

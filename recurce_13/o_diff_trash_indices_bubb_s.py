@@ -4,14 +4,14 @@
 
 def bubble_sort():
     _ = int(input())
-    nums = [int(element) for element in input().strip().split()]
+    nums = input().split()
     k_position = int(input())
     diff = []
     while nums != []:
         i = nums.pop()
         for j in nums:
-            diff.append(abs(j-i))
-            diff.sort()
+            diff.append(abs(int(j)-int(i)))
+        diff.sort()
     print(diff[k_position-1])
 
 
