@@ -2,7 +2,6 @@
 #  ID успешной посылки 66593272
 
 
-
 class Node:
     def __init__(self, value, left=None, right=None):
         self.value = value
@@ -23,7 +22,7 @@ def solution(root):
     right_height = height(root.right)
     if ((abs(left_height - right_height) <= 1)
         and solution(root.left) is True
-        and solution(root.right) is True):
+       and solution(root.right) is True):
         return True
     return False
 

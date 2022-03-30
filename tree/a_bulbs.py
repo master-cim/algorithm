@@ -19,6 +19,7 @@ def find_max_bulb(root):
         res = right_res
     return res
 
+
 def find_min_bubl(root):
     if root is None:
         return float('inf')
