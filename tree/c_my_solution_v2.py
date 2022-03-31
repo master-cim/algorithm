@@ -8,6 +8,12 @@ class Node:
         self.left = left
 
 
+def deep(root) -> int:
+    if root is None:
+        return 0
+    return max(deep(root)) + 1
+
+
 def solution(root):
     if root is None:
         return False
@@ -19,6 +25,8 @@ def solution(root):
         if root.left.value == root.right.value:
             return (solution(root.left)
                     and solution(root.right))
+    if deep(root.left) == deep(root.right):
+        return True
     return False
 
 
