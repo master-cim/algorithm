@@ -1,3 +1,5 @@
 Scikit-Learn
 matplotlib
 jupyter 
+pandas
+pytz
